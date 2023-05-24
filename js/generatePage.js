@@ -3,13 +3,13 @@ $(document).ready(function () {
     let receivedData = generateData(8); // <== change this arg to adjust the number of cards generated. 
     let parsedData = parseAll(receivedData); // converts JSON into javascript objects (assuming received JSON)
 
-    parsedData.forEach(entry => {
-        let cardTemplate = generateCardTemplate(entry.title, entry.details, entry.img);
+    parsedData.forEach((entry, index) => {
+        let cardTemplate = generateCardTemplate(entry.title, entry.details, entry.img, index);
 
         $("#js-card-content").append(cardTemplate);
     });
 
-
+    update(parsedData);
 });
 
 
@@ -37,7 +37,6 @@ function parseAll(receivedData) {
     let parsedData = [];
 
     receivedData.forEach(entry => {
-        console.log()
         parsedData.push(JSON.parse(entry));
     });
 
@@ -49,12 +48,13 @@ function parseAll(receivedData) {
  * @param {string} title Card title
  * @param {string} details Card body text
  * @param {string} img Card image name
+ * @param {number} index Index passed for data-index attribute creation purporses.
  * @returns {string} HTML card template
  */
-function generateCardTemplate(title, details, img) {
+function generateCardTemplate(title, details, img, index) {
     let template = `
     <div class="col-12 col-md-3">
-    <div class="card border-0 mb-4">
+    <div class="card border-0 mb-4" data-index="${index}">
         <img src="./img/${img}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center text-blue fw-bold">${title}</h5>
