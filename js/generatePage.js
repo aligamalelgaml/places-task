@@ -21,7 +21,7 @@ function generateData(number) {
     let createdData = [];
 
     for(let i = 0; i < number; i++) {
-        let createdEntry = JSON.stringify({"title": `Title ${i}`, "details": `Lorem ipsum dolor sit amet consectetur adipisicing elit. ea corporis consequatur? Doloremque quae labore dolorem ${i}.`, "img":`${getRandomImg()}`}); 
+        let createdEntry = JSON.stringify({"title": `Title ${i}`, "details": `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique laudantium aperiam dolor atque voluptatibus perferendis optio doloribus blanditiis modi. Tempore eligendi id mollitia modi quae temporibus aliquam magni necessitatibus saepe ${i}.`, "img":`${getRandomImg()}`}); 
         createdData.push(createdEntry);
     }
 
@@ -58,7 +58,7 @@ function generateCardTemplate(title, details, img, index) {
         <img src="./img/${img}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center text-blue fw-bold">${title}</h5>
-          <p class="card-text text-center">${details}</p>
+          <p class="card-text text-center">${cardTrim(details)}</p>
           <div class="card-details text-grey fs-6">
             <div class="row">
                 <div class="col-6">
@@ -78,6 +78,21 @@ function generateCardTemplate(title, details, img, index) {
     `;
 
     return template;
+}
+
+/** Trims strings if above 160 characters (including whitespace) in card brief only.
+ * @param {string} details String to be trimmed 
+ * @returns {string} reformatted string
+ */
+function cardTrim(details) {
+    console.log(details.length)
+
+    if(details.length > 160) {
+        console.log(details.length)
+        return details.substring(0, 159).concat("...");
+    } else {
+        return details;
+    }
 }
 
 
