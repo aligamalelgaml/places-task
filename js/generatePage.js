@@ -44,7 +44,7 @@ function parseAll(receivedData) {
 }
 
 
-/** Creates an HTML template
+/** Creates an HTML template for the given card.
  * @param {string} title Card title
  * @param {string} details Card body text
  * @param {string} img Card image name
@@ -53,7 +53,7 @@ function parseAll(receivedData) {
  */
 function generateCardTemplate(title, details, img, index) {
     let template = `
-    <div class="col-12 col-md-3">
+    <div class="col-12 col-sm-8 col-lg-6 col-xl-3">
     <div class="card border-0 mb-4" data-index="${index}">
         <img src="./img/${img}" class="card-img-top" alt="...">
         <div class="card-body">
